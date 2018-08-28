@@ -76,7 +76,7 @@ ending (x:xs) = [x ++ "ing"] ++ ending xs
 -- returns the first n elements of 
 -- the list
 takeInt :: Int -> [Int] -> [Int]
-takeInt 0 iList = []
+takeInt n nlist | (n <= 0) = []
 takeInt n ([]) = [] -- if i is 
 takeInt n (x:xs) = [x] ++ takeInt (n-1) xs
 
@@ -86,9 +86,9 @@ fizzbuzz = map changeText [1..100]
 
 changeText :: Int -> String
 changeText x 
-    | mod x 3 == 0 && mod x 5 == 0 = "fizzbuzz"
-    | mod x 3 == 0 = "fizz"
-    | mod x 5 == 0 = "buzz"
+    | mod x 3 == 0 && mod x 5 == 0 = "FizzBuzz"
+    | mod x 3 == 0 = "Fizz"
+    | mod x 5 == 0 = "Buzz"
     | otherwise = show x
 
 printFizz :: IO ()
@@ -101,18 +101,19 @@ printFizz = mapM_ putStrLn fizzbuzz
 -- even numbers that are equal or greater than 0
 -- use a list comprehension
 listOfEven :: [Integer]
-listOfEven = [x | x <- [1..1000], mod x 2 == 0]
+listOfEven = [x | x <- [0..], mod x 2 == 0]
 
 -- create a list of tuples, "zipped"
 -- where each tuple contains the nth entry
 -- in the lists [1..26] and ['a'..'z']
 -- hint: parallel list comprehension
 zipped :: [(Int, Char)]
-zipped = zip [1..26] ['a'..'z']
+zipped = zip [1..26] ['a'..'z'] -- :D
+-- zipped = zip [1..26] ['a'..'z']
 
 -- create a list that contains the cartesian
 -- product of the two vectors [4, 6, 8]
 -- and [3, 7, 9]
 -- use a list comprehension
 cartesian :: [(Int, Int)]
-cartesian = undefined
+cartesian = [(x, y) | x <- [4,6,8], y <- [3,7,9]]
