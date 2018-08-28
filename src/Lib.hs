@@ -32,7 +32,7 @@ add n m = n + m
 -- hint: a string is a list
 -- hint2: use `elem` from Prelude
 isVowel :: Char -> Bool
-isVowel chr = elem chr "AEIOU"
+isVowel chr = elem chr "AEIOUaeiou"
 
 data Status = One | Two | Three | None deriving (Show, Eq)
 
@@ -41,8 +41,12 @@ data Status = One | Two | Three | None deriving (Show, Eq)
 -- it then pattern matches on the amount of subjects in the list
 -- and returns a tuple of a Status (look above, describes the amount of subjects in the list)
 -- and the name
+h = "Haskell"
 amountOf :: String -> [a] -> (Status, String)
-amountOf = undefined
+amountOf h [_] = (One, h)
+amountOf h [_,_] = (Two, h)
+amountOf h [_,_,_] = (Three, h)
+amountOf name list = (None, h)
 
 -- TASK 2
 -- Recursion
@@ -52,7 +56,9 @@ amountOf = undefined
 -- assuming that 0th = 0 and 1st = 1
 -- do not optimize it
 fib :: Int -> Int
-fib = undefined
+fib 0 = 0
+fib 1 = 1
+fib x = fib (x-1) + fib (x-2)
 
 -- TASK 3
 -- Working with lists
@@ -61,18 +67,30 @@ fib = undefined
 -- strings and returns them with the ending -ing
 -- if the string is empty, remove it from the list
 ending :: [String] -> [String]
-ending = undefined
+ending ([]) = []
+ending ("":xs) = ending xs
+ending (x:xs) = [x ++ "ing"] ++ ending xs
 
 -- complete the function "takeInt" that
 -- an integer n and a list of integers and
 -- returns the first n elements of 
 -- the list
 takeInt :: Int -> [Int] -> [Int]
-takeInt = undefined
+takeInt 0 iList = []
+takeInt n ([]) = [] -- if i is 
+takeInt n (x:xs) = [x] ++ takeInt (n-1) xs
 
 -- implement "fizzbuzz" as described in exercise 1
+ints = [1..100]
 fizzbuzz :: [String]
+--fizzbuzz = (map (>3) [1,2,3,4])
 fizzbuzz = undefined
+
+testStuff :: [String]
+testStuff ints
+    | mod x 3 == 0 = "fizz"
+    | mod x 5 == 0 = "buzz"
+    | otherwise = -1
 
 printFizz :: IO ()
 printFizz = mapM_ putStrLn fizzbuzz
