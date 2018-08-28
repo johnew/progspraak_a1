@@ -81,16 +81,15 @@ takeInt n ([]) = [] -- if i is
 takeInt n (x:xs) = [x] ++ takeInt (n-1) xs
 
 -- implement "fizzbuzz" as described in exercise 1
-ints = [1..100]
 fizzbuzz :: [String]
---fizzbuzz = (map (>3) [1,2,3,4])
-fizzbuzz = undefined
+fizzbuzz = map changeText [1..100]
 
-testStuff :: [String]
-testStuff ints
+changeText :: Int -> String
+changeText x 
+    | mod x 3 == 0 && mod x 5 == 0 = "fizzbuzz"
     | mod x 3 == 0 = "fizz"
     | mod x 5 == 0 = "buzz"
-    | otherwise = -1
+    | otherwise = show x
 
 printFizz :: IO ()
 printFizz = mapM_ putStrLn fizzbuzz
@@ -102,14 +101,14 @@ printFizz = mapM_ putStrLn fizzbuzz
 -- even numbers that are equal or greater than 0
 -- use a list comprehension
 listOfEven :: [Integer]
-listOfEven = undefined
+listOfEven = [x | x <- [1..1000], mod x 2 == 0]
 
 -- create a list of tuples, "zipped"
 -- where each tuple contains the nth entry
 -- in the lists [1..26] and ['a'..'z']
 -- hint: parallel list comprehension
 zipped :: [(Int, Char)]
-zipped = undefined
+zipped = zip [1..26] ['a'..'z']
 
 -- create a list that contains the cartesian
 -- product of the two vectors [4, 6, 8]
